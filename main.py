@@ -164,8 +164,8 @@ async def reakcia_na_knopku(call: types.callback_query):
             sql = arugamDB.cursor()
             sql_select_query = """SELECT id, customerTelegram FROM obmen WHERE statusDone != ?"""
             sql.execute(sql_select_query, ("done",))
-            records = sql.fetchall()
-            await bot.send_message(call.message.chat.id, records)
+            sdelki = sql.fetchall()
+            await bot.send_message(call.message.chat.id, sdelki)
     except sqlite3.Error as error:
         print("Ошибка при работе с SQLite", error)
 
@@ -286,28 +286,28 @@ async def text(message: types.Message):
 
 
 
-
-        elif text[0].lower().startswith("заявка"):
-            await bot.send_message(id_egor, message.text)
-            await bot.send_message(message.chat.id, "заявка на обмен отправлена")
-        elif text[0].lower() == "пока":
-            await bot.send_message(message.chat.id, f"пока {message.chat.first_name}")
-        elif text[0].isdigit():
-            num = message.text
-            print(num)
-            await bot.send_message(message.chat.id, "опа, цифры")
-            await bot.send_message(id_gosha, f"@{message.chat.username} {message.chat.id}") #присылает мне в личку id
-            await bot.send_message(message.chat.id, "а я твой айдишник спиздил)")
-            with open("jay_bob.mp4", "rb") as vidos:
-                await message.reply_video(video=vidos)
-        elif text[0].isalpha():
-            text = message.text
-            print(text)
-            await bot.send_message(message.chat.id, "опа, буквы")
-            with open("jay_bob.mp4", "rb") as vidos:
-                await message.reply_video(video=vidos)
-            await bot.send_message(id_gosha, f"@{message.chat.username} {text}")
-
+        #
+        # elif text[0].lower().startswith("заявка"):
+        #     await bot.send_message(id_egor, message.text)
+        #     await bot.send_message(message.chat.id, "заявка на обмен отправлена")
+        # elif text[0].lower() == "пока":
+        #     await bot.send_message(message.chat.id, f"пока {message.chat.first_name}")
+        # elif text[0].isdigit():
+        #     num = message.text
+        #     print(num)
+        #     await bot.send_message(message.chat.id, "опа, цифры")
+        #     await bot.send_message(id_gosha, f"@{message.chat.username} {message.chat.id}") #присылает мне в личку id
+        #     await bot.send_message(message.chat.id, "а я твой айдишник спиздил)")
+        #     with open("jay_bob.mp4", "rb") as vidos:
+        #         await message.reply_video(video=vidos)
+        # elif text[0].isalpha():
+        #     text = message.text
+        #     print(text)
+        #     await bot.send_message(message.chat.id, "опа, буквы")
+        #     with open("jay_bob.mp4", "rb") as vidos:
+        #         await message.reply_video(video=vidos)
+        #     await bot.send_message(id_gosha, f"@{message.chat.username} {text}")
+        #
 
 # @dispatcher.callback_query_handler(lambda c: c.data == "NewSdelka")
 # async def reakcia_na_knopku(call: types.callback_query):
